@@ -1,3 +1,4 @@
+# implementation of appendix F.1
 import numpy as np
 import os
 from procgen import ProcgenEnv
