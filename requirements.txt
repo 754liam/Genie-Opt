@@ -1,0 +1,5 @@
+numpy
+procgen
+gym==0.21.0
+torch
+torchvision
