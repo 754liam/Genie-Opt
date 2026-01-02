@@ -10,6 +10,8 @@ class VectorQuantizer(nn.Module):
         self._embedding = nn.Embedding(num_embeddings, embedding_dim) # dictionary matrix, where rows represent tokens and columns represent meaning expressed as coordinates.
         self._embedding.weight.data.uniform_(-1/num_embeddings, 1/num_embeddings) # initialization - we use the inverse of such in our args as a range to enforce small numbers.
         self._commitment_cost = commitment_cost # used for calculating loss - defines encoders snap range.
+        self._num_embeddings = num_embeddings  # defines num_embeddings - the size of the dictionary.
+        self._embedding_dim = embedding_dim # defines embedding_dim - the dimension of the tokens in the dictionary.
 
     def forward(self, inputs):
         # inputs will come in from the encoder as a torch tensor of shape [Batch_Size, 64, 16, 16]. each frame from data_collection.py is 64 x 64 and the encoder will shrink this down into a 16 x 16 'image', but the depth will go from 3 (rgb) to 64.
@@ -39,8 +41,6 @@ class VectorQuantizer(nn.Module):
 
         # message to be sent to the decoder. this seemingly redundant schema is used to fix the gradient attribute of quantized. we're removing the undefined gradient of quantized and just keeping it as the gradient of inputs itself.
         quantized = inputs + (quantized - inputs).detach()
-
-        # checks for codebook collapse. 
 
         #this line is for seeing the percentage frequency of every vector chosen in the codebook.
         avg_probs = torch.mean(encodings, dim=0)

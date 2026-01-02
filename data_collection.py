@@ -18,4 +18,5 @@ dataset = np.stack(all_frames) # all_frames now is a list of 5000 pointers - np.
 os.makedirs(DATA_DIR, exist_ok=True) 
 save_path = os.path.join(DATA_DIR, "training_data.npy")
 np.save(save_path, dataset)  # saves the dataset on the hard drive
+print("Data saved successfully.") # Useful for Docker run debugging.
 

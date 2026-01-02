@@ -1,2 +1,2 @@
 # Genie-Opt
-A replication of Google DeepMind's "Genie" World Model that optimizes its core spatiotemporal attention mechanism by reducing its complexity from quadratic to linear.
+A reproduction of Google DeepMind's 'Genie' World Model, implementing its Spatiotemporal (ST) Transformer architecture to achieve linear O(T) computational complexity on consumer hardware.
